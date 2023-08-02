@@ -1,8 +1,6 @@
-# FastAPI + MongoDB Boilerplate
+# Tender AI
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/WleFVe?referralCode=UBd_g_)
-
-This is a FastAPI boilerplate, which includes includes:
+This is a Tender AI backend that includes:
 
 - MongoDB as database
 - Bcrypt for password hashing
