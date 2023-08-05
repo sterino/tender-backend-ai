@@ -8,12 +8,7 @@ from .dependencies import parse_jwt_user_data
 
 
 class ChangeUserDataRequest(BaseModel):
-    pid: str = ""
-    typeSupplier: str = ""
-    nameRu: str = ""
-    regdate: str = ""
-    email: str = ""
-    phone: str = ""
+    bin: str = ""
 
 
 @router.patch("/users/me", response_model=ChangeUserDataRequest)

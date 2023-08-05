@@ -160,7 +160,7 @@ def getTrades(input):
     # Query for searching by bin
     query = """
         query($nameRu: String!) {
-            TrdBuy(filter: { nameRu: $nameRu }, limit: 200){
+            TrdBuy(filter: { nameRu: $nameRu }){
                 id
                 nameRu
                 totalSum
@@ -236,14 +236,13 @@ def getTrades(input):
 
 def getLots(input: str):
     disable_warnings(InsecureRequestWarning)
-
     info = input
     url = "https://ows.goszakup.gov.kz/v3/graphql"
     headers = {"Authorization": f"Bearer {token}"}
 
     query = """
         query($nameRu: String!) {
-            Lots(filter: { nameRu: $nameRu }, limit: 200){
+            Lots(filter: { nameRu: $nameRu }){
                 id
                 refLotStatusId
                 count

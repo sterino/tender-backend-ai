@@ -19,11 +19,29 @@ class AuthRepository:
     def __init__(self, database: Database):
         self.database = database
 
-    def create_user(self, user: dict):
+    def create_user(self, user: dict, gosuser: dict):
         payload = {
             "email": user["email"],
             "password": hash_password(user["password"]),
             "bin": user["bin"],
+            "nameRu": gosuser[0]["nameRu"],
+            "pid": gosuser[0]["pid"],
+            "regdate": gosuser[0]["regdate"],
+            "gosemail": gosuser[0]["email"],
+            "phone": gosuser[0]["phone"],
+            "supplier": gosuser[0]["supplier"],
+            "typeSupplier": gosuser[0]["typeSupplier"],
+            "customer": gosuser[0]["customer"],
+            "organizer": gosuser[0]["organizer"],
+            "employers": {
+                "employer": {
+                    "roleName": emp["roleName"],
+                    "iin": emp["iin"],
+                    "fio": emp["fio"],
+                }
+                for emp in gosuser[0]["Employees"]
+            },
+            "Address": {"address": add["address"] for add in gosuser[0]["Address"]},
             "created_at": datetime.utcnow(),
         }
 

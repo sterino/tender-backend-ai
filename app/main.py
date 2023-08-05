@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
+from app.arnur.router import router as arnur_router
 from app.auth.router import router as auth_router
 from app.config import client, env, fastapi_config
-from app.shanyraqs.router import router as shanyraqs_router
 from app.tender.router import router as tender_router
 
 app = FastAPI(**fastapi_config)
@@ -23,5 +23,5 @@ app.add_middleware(
 )
 
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
-app.include_router(shanyraqs_router, prefix="/shanyraqs", tags=["Shanyraqs"])
 app.include_router(tender_router, prefix="/tender", tags=["Tender"])
+app.include_router(arnur_router, prefix="/arnur", tags=["Arnur"])

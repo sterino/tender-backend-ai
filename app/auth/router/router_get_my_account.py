@@ -15,9 +15,16 @@ class GetMyAccountResponse(AppModel):
     id: Any = Field(alias="_id")
     email: str = ""
     bin: str = ""
+    nameRu: str = ""
+    pid: str
+    gosemail: str = ""
     phone: str = ""
-    name: str = ""
-    city: str = ""
+    supplier: int
+    typeSupplier: int
+    customer: int
+    organizer: int
+    employers: dict
+    Address: dict
 
 
 @router.get("/users/me", response_model=GetMyAccountResponse)

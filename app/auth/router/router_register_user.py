@@ -27,6 +27,16 @@ def register_user(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Email is already taken.",
         )
-    svc.repository.create_user(input.dict())
+    gosuser = svc.repository.get_user_by_bin(input.bin)
+    if gosuser is not None:
+        print(
+            gosuser,
+        )
+        svc.repository.create_user(input.dict(), gosuser)
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="bin is not defined.",
+        )
 
     return RegisterUserResponse(email=input.email)
