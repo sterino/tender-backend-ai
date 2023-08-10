@@ -18,6 +18,5 @@ def get_trade_app(
     svc: Service = Depends(get_service),
 ):
     response = svc.repository.getTradesApp(bin)
-    
     print(response)
     return response

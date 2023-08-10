@@ -442,19 +442,17 @@ class ChatService:
             functions=function_descriptions,
             function_call="auto",  # specify the function call
         )
-
         output = completion.choices[0].message
         # input = output.function_call.arguments.NameBinIin
         params = output.function_call.name
         print(params)
-
+        result = None
         if params == "getSubject":
             arguments = output.function_call.arguments
             argument = json.loads(arguments)
             inp = argument.get("NameBinIin", "")
             print(inp)
             result = getSubject(inp)
-            return 1, result
         elif params == "getTrades":
             arguments = output.function_call.arguments
             argument = json.loads(arguments)
@@ -462,7 +460,6 @@ class ChatService:
             # strKato = argument.get("strKato", "")
             print(inp)
             result = getTrades(inp)
-            return 5, result
         elif params == "getLots":
             arguments = output.function_call.arguments
             argument = json.loads(arguments)
@@ -470,14 +467,12 @@ class ChatService:
             # strKato = argument.get("strKato", "")
             print(inp)
             result = getLots(inp)
-            return 6, result
         elif params == "getTradesApp":
             arguments = output.function_call.arguments
             argument = json.loads(arguments)
             inp = argument.get("text_for_search", "")
             # strKato = argument.get("strKato", "")
             result = getSubject(inp)
-            return 4, result
         elif params == "getContracts":
             arguments = output.function_call.arguments
             argument = json.loads(arguments)
@@ -485,7 +480,6 @@ class ChatService:
             # strKato = argument.get("strKato", "")
             print(inp)
             result = getSubject(inp)
-            return 2, result
         elif params == "getActs":
             arguments = output.function_call.arguments
             argument = json.loads(arguments)
@@ -493,4 +487,16 @@ class ChatService:
             # strKato = argument.get("strKato", "")
             print(inp)
             result = getSubject(inp)
-            return 3, result
+        result2 = json.dumps(result, ensure_ascii=True)
+        print(result2)
+        completion2 = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo-0613",
+            messages=[
+                {
+                    "role": "user",
+                    "content": "Ты помощник по тендерам, пользователь задал вопрос: "
+                    + prompt + ", ты должен ответить ему используя эти данные: " + result2,
+                }
+            ],
+        )
+        return completion2.choices[0].message.content

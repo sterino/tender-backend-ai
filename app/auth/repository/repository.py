@@ -138,3 +138,5 @@ class AuthRepository:
         subjects_by_bin = response_by_bin["data"]["Subjects"]
         if subjects_by_bin is not None:
             return subjects_by_bin
+        
+
